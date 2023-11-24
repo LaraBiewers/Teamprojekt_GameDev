@@ -21,9 +21,9 @@ public class WeaponController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Transform parentTransform = transform.parent;
-            parentRotationEuler = parentTransform.rotation;
 
-            Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
+            // DO NOT USE CAPSULES AS BULLETS; ELSE WEIRD THINGS
+            GameObject projectile = Instantiate(projectilePrefab, transform.position, parentTransform.rotation);
         }
     }
 }
