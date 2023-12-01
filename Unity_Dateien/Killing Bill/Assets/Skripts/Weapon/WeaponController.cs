@@ -18,7 +18,7 @@ public class WeaponController : MonoBehaviour
     void Update()
     {
         // Launch a projectile from the player
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetMouseButtonDown(0))
         {
             Transform parentTransform = transform.parent;
 
