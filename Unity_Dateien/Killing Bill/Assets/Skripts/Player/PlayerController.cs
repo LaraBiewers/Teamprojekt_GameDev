@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 { 
-    private float speed = 5.0f;
-    private float turnSpeed = 50.0f;
+    public float moveSpeed = 5.0f;
+    public float mouseSensitivity = 2.0f;
     private float horizontalInput;
     private float verticalInput;
 
@@ -24,11 +24,17 @@ public class PlayerController : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
 
-        // Move forward
-        transform.Translate(Vector3.forward * Time.deltaTime * speed * verticalInput);
+        // Move forward and sidewards
+        transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed * verticalInput);
+        transform.Translate(Vector3.right * Time.deltaTime * moveSpeed * horizontalInput);
 
-        // Rotate sideward
-        transform.Rotate(0, Time.deltaTime * turnSpeed * horizontalInput, 0);
+        // Rotation
+        // Abfrage der Mausbewegung
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
+
+        transform.Rotate(Vector3.up, mouseX, Space.World); // Spieler um die Y-Achse (vertikal) drehen
+        transform.Rotate(Vector3.left, mouseY, Space.Self); // Spieler um die X-Achse (horizontal) drehen
 
     }
 }
