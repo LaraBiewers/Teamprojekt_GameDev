@@ -5,20 +5,28 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
-{ 
-    public float moveSpeed = 5.0f;
-    public float mouseSensitivity = 2.0f;
+{
+
+    private Rigidbody playerRB;
 
     private float horizontalInput;
     private float verticalInput;
-
-    private Rigidbody playerRB;
-    private float jumpForce = 30;
+    private float mouseX;
+    private float mouseY;
     private bool isOnGround = true;
+
+    public GameObject Camera;
+
+    public float moveSpeed = 5.0f;
+    public float rotationSpeed = 2.0f;
+    public float jumpForce = 30;
 
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
         playerRB = GetComponent<Rigidbody>();
     }
 
@@ -26,21 +34,23 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
-        // Get playerInput
+        // Move forward and sidewards
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
 
-        // Move forward and sidewards
         transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed * verticalInput);
         transform.Translate(Vector3.right * Time.deltaTime * moveSpeed * horizontalInput);
 
-        // Rotation
-        // Abfrage der Mausbewegung
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
 
-        transform.Rotate(Vector3.up, mouseX, Space.World); // Spieler um die Y-Achse (vertikal) drehen
-        transform.Rotate(Vector3.left, mouseY, Space.Self); // Spieler um die X-Achse (horizontal) drehen
+        // Camera-Rotation
+        mouseX += Input.GetAxis("Mouse X") * rotationSpeed; //Vertikal
+        mouseY += Input.GetAxis("Mouse Y") * rotationSpeed; //Horizontal
+
+        mouseY = Mathf.Clamp(mouseY, -90f, 90f);
+
+        Camera.transform.localRotation = Quaternion.Euler(-mouseY, 0f, 0f);
+        transform.rotation = Quaternion.Euler(0f, mouseX, 0f);
+
 
         // Player jumping
         if (Input.GetKeyDown(KeyCode.Space) && isOnGround)
