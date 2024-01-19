@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using Unity.UI;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -16,10 +18,12 @@ public class PlayerController : MonoBehaviour
     private bool isOnGround = true;
 
     public GameObject Camera;
+    public Slider HealthBar;
 
     public float moveSpeed = 5.0f;
     public float rotationSpeed = 2.0f;
     public float jumpForce = 30;
+    public int health = 100;
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +32,7 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
 
         playerRB = GetComponent<Rigidbody>();
+        HealthBar = GameObject.Find("HealthBar").GetComponent<Slider>();
     }
 
     // Update is called once per frame
@@ -63,6 +68,31 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            //Debug.Log("Enemy detected. Taking damage.");
+
+            TakeDamage(20);
+
+        }
         isOnGround = true;
     }
+
+    private void TakeDamage(int damage)
+    {
+        health -= damage;
+
+        if(health < 0)
+        {
+            health = 0;
+        }
+
+        UpdateHealthBar();
+    }
+
+    private void UpdateHealthBar()
+    {
+        HealthBar.value = health;
+    }
+
 }
