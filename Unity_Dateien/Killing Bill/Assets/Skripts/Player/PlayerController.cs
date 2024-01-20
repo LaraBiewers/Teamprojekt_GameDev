@@ -18,21 +18,20 @@ public class PlayerController : MonoBehaviour
     private bool isOnGround = true;
 
     public GameObject Camera;
-    public Slider HealthBar;
+    private GameManager gameManager;
 
     public float moveSpeed = 5.0f;
     public float rotationSpeed = 2.0f;
     public float jumpForce = 30;
-    public int health = 100;
 
     // Start is called before the first frame update
     void Start()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         playerRB = GetComponent<Rigidbody>();
-        HealthBar = GameObject.Find("HealthBar").GetComponent<Slider>();
     }
 
     // Update is called once per frame
@@ -58,7 +57,7 @@ public class PlayerController : MonoBehaviour
 
 
         // Player jumping
-        if (Input.GetKeyDown(KeyCode.Space) && isOnGround)
+        if (Input.GetButtonDown("Jump") && isOnGround)
         {
             playerRB.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isOnGround = false;
@@ -72,27 +71,10 @@ public class PlayerController : MonoBehaviour
         {
             //Debug.Log("Enemy detected. Taking damage.");
 
-            TakeDamage(20);
-
+            gameManager.TakeDamage(20);
         }
         isOnGround = true;
     }
 
-    private void TakeDamage(int damage)
-    {
-        health -= damage;
-
-        if(health < 0)
-        {
-            health = 0;
-        }
-
-        UpdateHealthBar();
-    }
-
-    private void UpdateHealthBar()
-    {
-        HealthBar.value = health;
-    }
 
 }

@@ -18,7 +18,7 @@ public class WeaponController : MonoBehaviour
     void Update()
     {
         // Launch a projectile from the player
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetButtonDown("Fire1"))
         {
             Transform parentTransform = transform.parent;
 
