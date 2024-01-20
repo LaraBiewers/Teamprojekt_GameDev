@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
 
 
         // Player jumping
-        if (Input.GetKeyDown(KeyCode.Space) && isOnGround)
+        if (Input.GetButtonDown("Jump") && isOnGround)
         {
             playerRB.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isOnGround = false;

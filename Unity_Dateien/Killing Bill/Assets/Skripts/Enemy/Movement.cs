@@ -6,9 +6,9 @@ public class Movement : MonoBehaviour
 {
     // Start is called before the first frame update
     
-    public float speed = 10;
-    public float directionChangeInterval = 5;
-    public float maxHeadingChange = 100;
+    public float speed = 500;
+    public float directionChangeInterval = 500;
+    public float maxHeadingChange = 50;
 
     CharacterController controller;
     float heading;
