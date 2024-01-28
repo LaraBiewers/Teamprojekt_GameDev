@@ -21,8 +21,12 @@ public class PlayerController : MonoBehaviour
     private GameManager gameManager;
 
     public float moveSpeed = 5.0f;
-    public float rotationSpeed = 2.0f;
-    public float jumpForce = 30;
+    public float rotationSpeed = 1.0f;
+
+    private int jumpCounter = 2;
+    public float jumpForce_First = 30;
+    public float jumpForce_Second = 20;
+
 
     // Start is called before the first frame update
     void Start()
@@ -42,8 +46,9 @@ public class PlayerController : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
 
-        transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed * verticalInput);
-        transform.Translate(Vector3.right * Time.deltaTime * moveSpeed * horizontalInput);
+        Vector3 inputDirection = new Vector3(horizontalInput, 0f, verticalInput).normalized;
+
+        transform.Translate(inputDirection * Time.deltaTime * moveSpeed);
 
 
         // Camera-Rotation
@@ -56,13 +61,34 @@ public class PlayerController : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, mouseX, 0f);
 
 
-        // Player jumping
-        if (Input.GetButtonDown("Jump") && isOnGround)
+        // Player jumping singleTime
+        //if (Input.GetButtonDown("Jump") && isOnGround)
+        //{
+        //   playerRB.AddForce(Vector3.up * jumpForce_First, ForceMode.Impulse);
+        //    isOnGround = false;
+        //}
+
+        // Player jumping doubleTime
+        if (Input.GetButtonDown("Jump") && jumpCounter != 0)
         {
-            playerRB.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            if (jumpCounter == 2)
+            {
+                playerRB.AddForce(Vector3.up * jumpForce_First, ForceMode.Impulse);
+            }
+            if (jumpCounter == 1)
+            {
+                playerRB.AddForce(Vector3.up * jumpForce_Second, ForceMode.Impulse);
+            }
+
+            jumpCounter--;
             isOnGround = false;
         }
-        
+
+        if (isOnGround)
+        {
+            jumpCounter = 2;
+        }
+
     }
 
     private void OnCollisionEnter(Collision collision)
