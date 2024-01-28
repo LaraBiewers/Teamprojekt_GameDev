@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 5.0f;
     public float rotationSpeed = 1.0f;
 
+    private float normalDrag;
+    public float jumpDrag = -1f;
     private int jumpCounter = 2;
     public float jumpForce_First = 30;
     public float jumpForce_Second = 20;
@@ -36,6 +38,7 @@ public class PlayerController : MonoBehaviour
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         playerRB = GetComponent<Rigidbody>();
+        normalDrag = playerRB.drag;
     }
 
     // Update is called once per frame
@@ -71,6 +74,7 @@ public class PlayerController : MonoBehaviour
         // Player jumping doubleTime
         if (Input.GetButtonDown("Jump") && jumpCounter != 0)
         {
+
             if (jumpCounter == 2)
             {
                 playerRB.AddForce(Vector3.up * jumpForce_First, ForceMode.Impulse);
@@ -80,6 +84,8 @@ public class PlayerController : MonoBehaviour
                 playerRB.AddForce(Vector3.up * jumpForce_Second, ForceMode.Impulse);
             }
 
+            playerRB.drag = jumpDrag;
+
             jumpCounter--;
             isOnGround = false;
         }
@@ -87,6 +93,7 @@ public class PlayerController : MonoBehaviour
         if (isOnGround)
         {
             jumpCounter = 2;
+            playerRB.drag = normalDrag;
         }
 
     }

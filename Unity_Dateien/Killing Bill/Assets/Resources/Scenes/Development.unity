@@ -588,7 +588,7 @@ GameObject:
   - component: {fileID: 461314293}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -694,8 +694,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Camera: {fileID: 963194225}
   moveSpeed: 5
-  rotationSpeed: 2
-  jumpForce: 30
+  rotationSpeed: 1
+  jumpDrag: -1
+  jumpForce_First: 30
+  jumpForce_Second: 30
 --- !u!54 &461314294
 Rigidbody:
   m_ObjectHideFlags: 0
