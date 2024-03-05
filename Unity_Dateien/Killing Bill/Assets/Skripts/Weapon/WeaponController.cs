@@ -6,20 +6,27 @@ public class WeaponController : MonoBehaviour
 {
 
     public GameObject projectilePrefab;
-    private Quaternion parentRotationEuler;
+    public float fireRate = 0.25f;
+
+    private AudioSource gunAudio;
+    private float nextFire;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        gunAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
         // Launch a projectile from the player
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && Time.time > nextFire)
         {
+            nextFire = Time.time + fireRate;
+
+            gunAudio.Play();
+
             Transform parentTransform = transform.parent;
 
             // DO NOT USE CAPSULES AS BULLETS; ELSE WEIRD THINGS
