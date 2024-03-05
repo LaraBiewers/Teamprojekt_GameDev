@@ -47,14 +47,16 @@ public class PlayerController : MonoBehaviour
 
 
         // Camera-Rotation
-        mouseX += Input.GetAxis("Mouse X") * rotationSpeed; //Vertikal
-        mouseY += Input.GetAxis("Mouse Y") * rotationSpeed; //Horizontal
+        if (!GameManager.gameOver)
+        {
+            mouseX += Input.GetAxis("Mouse X") * rotationSpeed; //Vertikal
+            mouseY += Input.GetAxis("Mouse Y") * rotationSpeed; //Horizontal
 
-        mouseY = Mathf.Clamp(mouseY, -90f, 90f);
+            mouseY = Mathf.Clamp(mouseY, -90f, 90f);
 
-        Camera.transform.localRotation = Quaternion.Euler(-mouseY, 0f, 0f);
-        transform.rotation = Quaternion.Euler(0f, mouseX, 0f);
-
+            Camera.transform.localRotation = Quaternion.Euler(-mouseY, 0f, 0f);
+            transform.rotation = Quaternion.Euler(0f, mouseX, 0f);
+        }
 
         // Player jumping
         if (Input.GetButtonDown("Jump") && isOnGround)
@@ -62,6 +64,8 @@ public class PlayerController : MonoBehaviour
             playerRB.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isOnGround = false;
         }
+
+
         
     }
 

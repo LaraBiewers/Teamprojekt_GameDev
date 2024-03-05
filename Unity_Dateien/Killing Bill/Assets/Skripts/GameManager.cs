@@ -5,15 +5,18 @@ using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class GameManager : MonoBehaviour
 {
     public int score;
     public int health;
+    public static bool gameOver = false;
     public TextMeshProUGUI scoreText;
     public Button restart;
     public TextMeshProUGUI gameOverText;
     public Slider HealthBar;
+    public RawImage Crossheir;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +25,7 @@ public class GameManager : MonoBehaviour
 
         health = 100;
         HealthBar = GameObject.Find("HealthBar").GetComponent<Slider>();
+        Crossheir = GameObject.Find("Crossheir").GetComponent<RawImage>();
 
         
     }
@@ -31,12 +35,19 @@ public class GameManager : MonoBehaviour
     {
         if(health == 0)
         {
-            Time.timeScale = 0.0f;
-            gameOverText.gameObject.SetActive(true);
-            restart.gameObject.SetActive(true);
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
+            isGameOver();
         }
+    }
+
+    public void isGameOver()
+    {
+        gameOver = true;
+        Time.timeScale = 0.0f;
+        Crossheir.gameObject.SetActive(false);
+        gameOverText.gameObject.SetActive(true);
+        restart.gameObject.SetActive(true);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void updateScore(int scoreToAdd)
