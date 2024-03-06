@@ -11,6 +11,7 @@ public class WeaponController : MonoBehaviour
     private AudioSource gunAudio;
 
     public float fireRate = 0.25f;
+    public float damage = 1f;
 
     private float nextFire;
 
@@ -42,6 +43,13 @@ public class WeaponController : MonoBehaviour
         if(Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit))
         {
             Debug.Log(hit.transform.name);
+
+            DetectColision target = hit.transform.GetComponent<DetectColision>();
+
+            if(target != null)
+            {
+                target.TakeDamage(damage);
+            }
         }
 
     }
