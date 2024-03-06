@@ -5,10 +5,13 @@ using UnityEngine;
 public class WeaponController : MonoBehaviour    
 {
 
+    public Camera fpsCam;
     public GameObject projectilePrefab;
-    public float fireRate = 0.25f;
 
     private AudioSource gunAudio;
+
+    public float fireRate = 0.25f;
+
     private float nextFire;
 
     // Start is called before the first frame update
@@ -30,9 +33,16 @@ public class WeaponController : MonoBehaviour
     void Shoot()
     {
         gunAudio.Play();
-
         nextFire = Time.time + fireRate;
-        Transform parentTransform = transform.parent;
-        GameObject projectile = Instantiate(projectilePrefab, transform.position, parentTransform.rotation);
+
+        //Transform parentTransform = transform.parent;
+        //GameObject projectile = Instantiate(projectilePrefab, transform.position, parentTransform.rotation);
+
+        RaycastHit hit;
+        if(Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit))
+        {
+            Debug.Log(hit.transform.name);
+        }
+
     }
 }
