@@ -23,14 +23,16 @@ public class WeaponController : MonoBehaviour
         // Launch a projectile from the player
         if (Input.GetButtonDown("Fire1") && Time.time > nextFire)
         {
-            nextFire = Time.time + fireRate;
-
-            gunAudio.Play();
-
-            Transform parentTransform = transform.parent;
-
-            // DO NOT USE CAPSULES AS BULLETS; ELSE WEIRD THINGS
-            GameObject projectile = Instantiate(projectilePrefab, transform.position, parentTransform.rotation);
+            Shoot();
         }
+    }
+
+    void Shoot()
+    {
+        gunAudio.Play();
+
+        nextFire = Time.time + fireRate;
+        Transform parentTransform = transform.parent;
+        GameObject projectile = Instantiate(projectilePrefab, transform.position, parentTransform.rotation);
     }
 }
