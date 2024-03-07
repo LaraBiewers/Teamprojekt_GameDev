@@ -1288,6 +1288,7 @@ MonoBehaviour:
   fpsCam: {fileID: 963194227}
   waeponOutput: {fileID: 849912106}
   projectilePrefab: {fileID: 7830433099966572519, guid: a475e48f47f0dfc4290be92a733e35e9, type: 3}
+  shootForce: 50
   damage: 1
   fireRate: 0.25
 --- !u!82 &823065771
