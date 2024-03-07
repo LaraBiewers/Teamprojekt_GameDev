@@ -29,13 +29,10 @@ public class WeaponController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Transform WeaponPosition = transform.parent;
-
         // Launch a projectile from player
         if (Input.GetButtonDown("Fire1") && Time.time > nextFire)
         {
             Shoot();
-            // GameObject projectile = Instantiate(projectilePrefab, transform.position, WeaponPosition.rotation);
         }
     }
 
