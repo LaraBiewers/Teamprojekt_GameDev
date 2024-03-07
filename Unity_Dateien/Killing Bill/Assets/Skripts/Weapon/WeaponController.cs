@@ -52,14 +52,6 @@ public class WeaponController : MonoBehaviour
             // Logging what's hit and where
             Debug.Log(hit.transform.name);
             targetPoint = hit.point;
-
-            // hit Antibody -> inflict damage
-            DetectColisionAntibody target = hit.transform.GetComponent<DetectColisionAntibody>();
-
-            if (target != null)
-            {
-                target.TakeDamage(damage);
-            }
         }
         else
         {
