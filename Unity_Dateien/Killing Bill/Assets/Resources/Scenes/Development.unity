@@ -1265,11 +1265,12 @@ Transform:
   m_GameObject: {fileID: 823065768}
   serializedVersion: 2
   m_LocalRotation: {x: -0.000090038404, y: -0.06328659, z: -0.08334738, w: 0.9945089}
-  m_LocalPosition: {x: 0.39525527, y: -0.255, z: 0.786}
+  m_LocalPosition: {x: 0.39525527, y: -0.20125532, z: 0.864}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 873421355}
+  - {fileID: 849912106}
   m_Father: {fileID: 963194228}
   m_LocalEulerAnglesHint: {x: -0.615, y: -7.231, z: -9.542}
 --- !u!114 &823065770
@@ -1284,7 +1285,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 977bcffb77f09854a9caedb5366cbbc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fpsCam: {fileID: 963194227}
+  waeponOutput: {fileID: 849912106}
   projectilePrefab: {fileID: 7830433099966572519, guid: a475e48f47f0dfc4290be92a733e35e9, type: 3}
+  damage: 1
   fireRate: 0.25
 --- !u!82 &823065771
 AudioSource:
@@ -1457,6 +1461,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 830088665}
   m_CullTransparentMesh: 1
+--- !u!1 &849912105
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 849912106}
+  m_Layer: 0
+  m_Name: Output
+  m_TagString: Untagged
+  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &849912106
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 849912105}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.7869, y: 0.1825, z: 0.1421}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 823065769}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &873421355 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 64bf1de7c11b8604daa541b5e8be0553, type: 3}
@@ -2211,6 +2246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f2e5ac79c03c264e8cde9429b0dc866, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 2
 --- !u!1 &1193001564
 GameObject:
   m_ObjectHideFlags: 0
