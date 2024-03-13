@@ -83,7 +83,6 @@ public class GameManager : MonoBehaviour
     public void restart()
     {
         gameIsOver = false;
-
         Time.timeScale = 1.0f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
@@ -92,6 +91,7 @@ public class GameManager : MonoBehaviour
 
     public void mainMenu()
     {
+        gameIsOver = false;
         SceneManager.LoadScene("MainMenu");
         
         Debug.Log("Main Menu");
