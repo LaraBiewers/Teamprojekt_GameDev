@@ -4,8 +4,6 @@
     <list default="true" id="ac04d711-9bcc-4d41-be64-43569f3776b0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Killing Bill/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Killing Bill/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/Scenes/Development.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Scenes/Development.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Skripts/Enemy/DetectColisionAntibody.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Skripts/Enemy/DetectColisionAntibody.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Skripts/Weapon/WeaponController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Skripts/Weapon/WeaponController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,6 +86,7 @@
       <workItem from="1710149617620" duration="189000" />
       <workItem from="1710150137756" duration="3825000" />
       <workItem from="1710160765220" duration="3396000" />
+      <workItem from="1710336042152" duration="614000" />
     </task>
     <servers />
   </component>
