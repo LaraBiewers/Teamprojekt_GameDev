@@ -6,11 +6,11 @@ public class WeaponController : MonoBehaviour
 {
     // References
     public Camera fpsCam;
-    public Transform waeponOutput;
+    public Transform weaponOutput;
     private AudioSource gunAudio;
 
     // bullet
-    public GameObject projectilePrefab;
+    public ParticleSystem projectileParticleSystem;
 
     // bullet force
     public float shootForce;
@@ -59,16 +59,20 @@ public class WeaponController : MonoBehaviour
         }
 
         // direction from attackPoint to targetPoint
-        Vector3 direction = targetPoint - waeponOutput.position;
+        Vector3 direction = targetPoint - weaponOutput.position;
 
         // Instantiate bullet/projectile
-        GameObject currentProjectile = Instantiate(projectilePrefab, waeponOutput.position, Quaternion.identity); 
-        currentProjectile.transform.forward = direction.normalized;
+        //ParticleSystem currentProjectile = Instantiate(projectileParticleSystem, weaponOutput.position, Quaternion.identity);
+        projectileParticleSystem.transform.position = weaponOutput.position;
+        projectileParticleSystem.transform.forward = direction.normalized;
 
         // Add forces to bullet
-        currentProjectile.GetComponent<Rigidbody>().AddForce(direction.normalized * shootForce, ForceMode.Impulse);
+        //currentProjectile.GetComponent<Rigidbody>().AddForce(direction.normalized * shootForce, ForceMode.Impulse);
+        //currentProjectile.main.startSpeed = shootForce;
+        var main = projectileParticleSystem.main;
+        main.startSpeed = shootForce;
 
         // Currently not-existing effects :3
-
+        projectileParticleSystem.Play();
     }
 }
