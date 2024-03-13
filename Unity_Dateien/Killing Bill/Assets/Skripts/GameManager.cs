@@ -11,11 +11,14 @@ public class GameManager : MonoBehaviour
 {
     public int score;
     public int health;
-    public static bool gameOver = false;
+    public static bool gameIsOver = false;
+    private bool isDead;
 
+    // GameOverScreen
+    public GameObject gameOverUI;
+
+    // Other UI Elements
     public TextMeshProUGUI scoreText;
-    public Button restart;
-    public TextMeshProUGUI gameOverText;
     public Slider HealthBar;
     public RawImage Crossheir;
 
@@ -34,19 +37,20 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(health == 0)
+        if(health == 0 && !isDead)
         {
-            isGameOver();
+            isDead = true;
+            gameOver();
+            Debug.Log("Player is Dead!");
         }
     }
 
-    public void isGameOver()
+    public void gameOver()
     {
-        gameOver = true;
+        gameIsOver = true;
 
+        gameOverUI.SetActive(true);
         Crossheir.gameObject.SetActive(false);
-        gameOverText.gameObject.SetActive(true);
-        restart.gameObject.SetActive(true);
 
         Time.timeScale = 0.0f;
         Cursor.visible = true;
@@ -76,9 +80,25 @@ public class GameManager : MonoBehaviour
         HealthBar.value = health;
     }
 
-    public void Restart()
+    public void restart()
     {
         Time.timeScale = 1.0f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        Debug.Log("Restart");
+    }
+
+    public void mainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+        
+        Debug.Log("Main Menu");
+    }
+
+    public void quit()
+    {
+        Application.Quit();
+
+        Debug.Log("Quit");
     }
 }

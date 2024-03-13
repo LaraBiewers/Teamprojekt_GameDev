@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
 
 
         // Camera-Rotation
-        if (!GameManager.gameOver)
+        if (!GameManager.gameIsOver)
         {
             mouseX += Input.GetAxis("Mouse X") * rotationSpeed; //Vertikal
             mouseY += Input.GetAxis("Mouse Y") * rotationSpeed; //Horizontal
