@@ -8,6 +8,7 @@ public class WeaponController : MonoBehaviour
     public Camera fpsCam;
     public Transform waeponOutput;
     private AudioSource gunAudio;
+    private GameManager gameManager;
 
     // bullet
     public GameObject projectilePrefab;
@@ -24,6 +25,7 @@ public class WeaponController : MonoBehaviour
     void Start()
     {
         gunAudio = GetComponent<AudioSource>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -33,6 +35,11 @@ public class WeaponController : MonoBehaviour
         if (Input.GetButtonDown("Fire1") && Time.time > nextFire)
         {
             Shoot();
+        }
+
+        if (GameManager.gameIsOver)
+        {
+            gunAudio.Stop();
         }
     }
 
