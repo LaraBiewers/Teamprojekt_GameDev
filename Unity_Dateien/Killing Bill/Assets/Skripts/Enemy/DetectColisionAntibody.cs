@@ -23,7 +23,7 @@ public class DetectColisionAntibody : MonoBehaviour
     {
        // if (other.CompareTag("Projectile"))
         //{
-            Destroy(other.gameObject);
+            //Destroy(other.gameObject);
             TakeDamage(_projectileDamage);
         //}
     }
