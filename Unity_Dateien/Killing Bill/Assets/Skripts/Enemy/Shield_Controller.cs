@@ -7,8 +7,9 @@ using UnityEngine.XR.WSA;
 
 public class Shield_Controller : MonoBehaviour
 {
-    [SerializeField] private int Health;
+    [SerializeField] private int health;
     [SerializeField] private int maxHP;
+    [SerializeField] private int _bulletDamage;
     private Renderer rend;
 
     
@@ -26,7 +27,7 @@ public class Shield_Controller : MonoBehaviour
         ShieldMidCracked = Resources.Load<Texture>("Materials/Shield_Mild_Cracked");
         ShieldFullCracked = Resources.Load<Texture>("Materials/Shield_Fully_Cracked");
         maxHP = 100;
-        Health = maxHP;
+        health = maxHP;
     }
 
     private void ShieldCheck(int h)
@@ -50,8 +51,21 @@ public class Shield_Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ShieldCheck(Health);
-        Health = Health > 100 ? 100 : Health;
-        Health = Health < 0 ? 0 : Health;
+        ShieldCheck(health);
+        health = health > 100 ? 100 : health;
+        health = health < 0 ? 0 : health;
+    }
+
+    void OnParticleCollision(GameObject other)
+    {
+        // if (other.CompareTag("Projectile"))
+        //{
+        //Destroy(other.gameObject);
+        TakeShieldDamage(_bulletDamage);
+        //}
+    }
+    void TakeShieldDamage(int amount)
+    {
+        health -= amount;
     }
 }
