@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3565857126095837054}
   m_Layer: 0
   m_Name: miniVirus
-  m_TagString: Untagged
+  m_TagString: MiniVirus
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -172,8 +172,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 232c210beeaa6c4499c2cddcb83445b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidbody: {fileID: 9084458920196449417}
-  speed: 8
   baseSpeed: 5
   maxSpeed: 30
   acceleration: 15

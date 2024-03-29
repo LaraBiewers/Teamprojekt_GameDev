@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Schema;
@@ -58,20 +59,22 @@ public class Shield_Controller : MonoBehaviour
 
     void OnParticleCollision(GameObject other)
     {
-        // if (other.CompareTag("Projectile"))
-        //{
-        //Destroy(other.gameObject);
         TakeShieldDamage(_bulletDamage);
-        //}
     }
 
-    private void OnCollision(Collision other)
+    
+    void OnCollisionEnter(Collision other)
     {
+        Debug.Log("outer");
         if (other.gameObject.CompareTag("MiniVirus"))
         {
+            Debug.Log("Inner");
             TakeShieldDamage(maxHP);
+            Destroy(other.gameObject);
         }
     }
+    
+
     void TakeShieldDamage(int amount)
     {
         health -= amount;

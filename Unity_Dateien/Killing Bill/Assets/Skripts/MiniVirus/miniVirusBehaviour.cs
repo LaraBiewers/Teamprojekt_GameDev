@@ -38,7 +38,7 @@ public class miniVirusBehaviour : MonoBehaviour
 
             if (timeElapsed > 1.0f)
             {
-                Destroy(GetComponent<Rigidbody>());
+                //Destroy(GetComponent<Rigidbody>());
                 initSeek();
             }
         }
