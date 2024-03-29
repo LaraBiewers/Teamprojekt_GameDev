@@ -15,7 +15,7 @@ public class miniVirusBehaviour : MonoBehaviour
     void Start()
     {
 
-        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        enemies = GameObject.FindGameObjectsWithTag("Shield");
         float x = Random.Range(0.0f, 300.0f);
         float y = Random.Range(0.0f, 300.0f);
         float z = Random.Range(0.0f, 300.0f);
