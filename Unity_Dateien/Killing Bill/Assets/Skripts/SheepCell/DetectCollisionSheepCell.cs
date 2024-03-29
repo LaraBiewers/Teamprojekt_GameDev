@@ -25,13 +25,9 @@ public class NewBehaviourScript : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnParticleCollision(GameObject other)
     {
-        if (other.CompareTag("Projectile"))
-        {
-            Destroy (other.gameObject);
             TakeDamage(projectileDamage);
-        }
     }
 
     void TakeDamage(float amount)

@@ -64,6 +64,14 @@ public class Shield_Controller : MonoBehaviour
         TakeShieldDamage(_bulletDamage);
         //}
     }
+
+    private void OnCollision(Collision other)
+    {
+        if (other.gameObject.CompareTag("MiniVirus"))
+        {
+            TakeShieldDamage(maxHP);
+        }
+    }
     void TakeShieldDamage(int amount)
     {
         health -= amount;
