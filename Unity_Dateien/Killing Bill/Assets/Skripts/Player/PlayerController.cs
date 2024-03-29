@@ -35,9 +35,10 @@ public class PlayerController : MonoBehaviour
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         playerRB = GetComponent<Rigidbody>();
+
         normalDrag = playerRB.drag;
     }
 

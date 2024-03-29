@@ -9,23 +9,23 @@ public class DetectColisionAntibody : MonoBehaviour
     private WeaponController WeaponController;
 
     public float health = 2f;
-    private float projectileDamage;
+    private float _projectileDamage;
 
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         WeaponController = GameObject.Find("Weapon").GetComponent<WeaponController>();
-        projectileDamage = WeaponController.damage;
+        _projectileDamage = WeaponController.damage;
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnParticleCollision(GameObject other)
     {
-        if (other.CompareTag("Projectile"))
-        {
-            Destroy(other.gameObject);
-            TakeDamage(projectileDamage);
-        }
+       // if (other.CompareTag("Projectile"))
+        //{
+            //Destroy(other.gameObject);
+            TakeDamage(_projectileDamage);
+        //}
     }
 
     void TakeDamage (float amount)
