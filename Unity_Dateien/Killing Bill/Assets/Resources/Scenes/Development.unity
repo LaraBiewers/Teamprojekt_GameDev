@@ -8517,7 +8517,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3903864531442576863, guid: cd4980fa028aab34a8da35c01087ee28, type: 3}
       propertyPath: CollisionModule.collidesWith.m_Bits
-      value: 63
+      value: 447
       objectReference: {fileID: 0}
     - target: {fileID: 3903864531442576863, guid: cd4980fa028aab34a8da35c01087ee28, type: 3}
       propertyPath: CollisionModule.collidesWithDynamic
