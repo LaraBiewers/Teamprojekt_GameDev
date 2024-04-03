@@ -10,11 +10,14 @@ using System;
 public class GameManager : MonoBehaviour
 {
     public int score;
+    public int scoreGoal = 400;
     public int health;
     public static bool gameIsOver = false;
     private bool isDead;
 
     // GameOverScreen
+    public GameObject winningScreenText;
+    public GameObject losingScreenText;
     public GameObject gameOverUI;
 
     // Other UI Elements
@@ -37,20 +40,32 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Handling GameWinning
+        if(score >= scoreGoal)
+        {
+            winningScreenText.SetActive(true);
+            gameOverScreen();
+            Debug.Log("You won the Game!");
+        }
+        
+        // Handling GameLosing
         if(health == 0 && !isDead)
         {
             isDead = true;
-            gameOver();
+            losingScreenText.SetActive(true);
+            gameOverScreen();
             Debug.Log("Player is Dead!");
         }
     }
 
-    public void gameOver()
+    // Showing GameOverScreen
+    public void gameOverScreen()
     {
         gameIsOver = true;
 
         gameOverUI.SetActive(true);
         Crossheir.gameObject.SetActive(false);
+        HealthBar.gameObject.SetActive(false);
 
         Time.timeScale = 0.0f;
         Cursor.visible = true;
@@ -80,6 +95,7 @@ public class GameManager : MonoBehaviour
         HealthBar.value = health;
     }
 
+    // GameOverScreen functionality 1
     public void restart()
     {
         gameIsOver = false;
@@ -89,6 +105,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Restart");
     }
 
+    // GameOverScreen functionality 2
     public void mainMenu()
     {
         gameIsOver = false;
@@ -97,6 +114,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Main Menu");
     }
 
+    // GameOverScreen functionality 3
     public void quit()
     {
         Application.Quit();
