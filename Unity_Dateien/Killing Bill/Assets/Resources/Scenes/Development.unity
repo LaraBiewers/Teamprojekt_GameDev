@@ -775,8 +775,8 @@ MonoBehaviour:
   moveSpeed: 5
   rotationSpeed: 1
   jumpDrag: -1
-  jumpForce_First: 30
-  jumpForce_Second: 30
+  jumpForce_First: 25
+  jumpForce_Second: 25
 --- !u!54 &461314294
 Rigidbody:
   m_ObjectHideFlags: 0
