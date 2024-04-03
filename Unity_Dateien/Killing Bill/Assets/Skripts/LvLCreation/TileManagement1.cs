@@ -55,8 +55,6 @@ public class TileManagement1 : MonoBehaviour
         Tile tile_180 = new(south, west, north, east,  model, 180);
         Tile tile_270 = new(east, south, west, north,  model, 270);
 
-        Debug.Log("Making tile " + tile_000.model);
-
         tileset.Add(tile_000);
         tileset.Add(tile_090);
         tileset.Add(tile_180);
@@ -95,22 +93,14 @@ public class TileManagement1 : MonoBehaviour
         {
             for (int z = 0; z < roomLength; z++)
             {
-                //This if statement makes sure we only spawn the outer tiles
-                //if (x == 0 || x == roomWidth - 1 || z == 0 || z == roomLength - 1)
-                //{
-                    room[x, z] = findFittingTile(x, z);
+                room[x, z] = findFittingTile(x, z);
 
-                    var loadedObject = Resources.Load("Prefabs/LevelTiles/" + room[x, z].baseTile.model);
-                    GameObject currentTile = (GameObject) Instantiate(loadedObject, new Vector3(x * 2, 0, z * 2), Quaternion.Euler(0, room[x, z].baseTile.Rotation, 0));
+                var loadedObject = Resources.Load("Prefabs/LevelTiles/" + room[x, z].baseTile.model);
+                GameObject currentTile = (GameObject) Instantiate(loadedObject, new Vector3(x * 2, 0, z * 2), Quaternion.Euler(0, room[x, z].baseTile.Rotation, 0));
                     
-                    currentTile.GetComponent<Renderer>().material = getTileMat(room[x, z].baseTile.Rotation);
+                currentTile.GetComponent<Renderer>().material = getTileMat(room[x, z].baseTile.Rotation);
 
-                Debug.Log("MakeRoom: " + room[x, z].baseTile.getVert(0) + ", " +
-                        room[x, z].baseTile.getVert(1) + ", " +
-                        room[x, z].baseTile.getVert(2) + ", " +
-                        room[x, z].baseTile.getVert(3) + ", ");
-                Debug.Log("------------------------------");
-                //}
+
         }
         }
     }
@@ -174,8 +164,6 @@ public class TileManagement1 : MonoBehaviour
     /// <returns></returns>
     PlacedTile findFittingTile(int x, int z)
     {
-        Debug.Log("FindFittingTile: x: " + x + ", z: " + z);
-
         int[] wantedVerts = new int[4];
 
         if (x == 0)
@@ -213,9 +201,6 @@ public class TileManagement1 : MonoBehaviour
             wantedVerts[0] = room[x, z - 1].baseTile.getVert(1);
             wantedVerts[3] = room[x, z - 1].baseTile.getVert(2);
         }
-
-        Debug.Log("FindFittingTile: Wanted sides are:" + wantedVerts[0] + ", " + wantedVerts[1] + ", " + wantedVerts[2] + ", " + wantedVerts[3] + ", ");
-
         List<PlacedTile> fittingTiles = new List<PlacedTile>();
         for (int i = 0; i < tileset.Count; i++)
         {

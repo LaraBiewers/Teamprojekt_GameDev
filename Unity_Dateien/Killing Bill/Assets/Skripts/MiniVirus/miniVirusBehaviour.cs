@@ -28,6 +28,7 @@ public class miniVirusBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        enemies = GameObject.FindGameObjectsWithTag("Shield");
         if (gogoMinivirus)
         {
             updateSeek(closestEnemy);
