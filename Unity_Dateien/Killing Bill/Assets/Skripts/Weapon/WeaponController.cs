@@ -37,6 +37,7 @@ public class WeaponController : MonoBehaviour
             Shoot();
         }
 
+        // TEST
         if (GameManager.gameIsOver)
         {
             gunAudio.Stop();

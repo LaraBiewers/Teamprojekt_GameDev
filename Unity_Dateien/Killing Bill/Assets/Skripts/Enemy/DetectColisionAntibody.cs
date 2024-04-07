@@ -11,7 +11,7 @@ public class DetectColisionAntibody : MonoBehaviour
     public float health = 2f;
     private float projectileDamage;
 
-    public AudioSource elementDie;
+    public static bool AntibodyShouldDie = false;
 
     // Start is called before the first frame update
     void Start()
@@ -43,7 +43,7 @@ public class DetectColisionAntibody : MonoBehaviour
         health -= amount;
         if (health <= 0f)
         {
-            elementDie.Play();
+            AntibodyShouldDie = true; // Needed for SoundControll
             Die();
         }
        

@@ -105,8 +105,6 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag(("Shield")))
         {
-            //Debug.Log("Enemy detected. Taking damage.");
-
             gameManager.TakeDamage(20);
         }
         isOnGround = true;

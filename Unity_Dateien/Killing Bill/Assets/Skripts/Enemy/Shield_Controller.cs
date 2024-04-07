@@ -20,14 +20,12 @@ public class Shield_Controller : MonoBehaviour
     private Texture ShieldMidCracked;
     private Texture ShieldFullCracked;
 
-    public AudioSource ShieldBreakAudio;
-    
+    public static bool shieldShouldBreak = false;
     
     // Start is called before the first frame update
     void Start()
     {
         rend = GetComponent<Renderer>();
-        ShieldBreakAudio = GetComponent<AudioSource>();
         ShieldLightCracked = Resources.Load<Texture>("Materials/Shield_Lightly_Cracked");
         ShieldMidCracked = Resources.Load<Texture>("Materials/Shield_Mild_Cracked");
         ShieldFullCracked = Resources.Load<Texture>("Materials/Shield_Fully_Cracked");
@@ -50,20 +48,8 @@ public class Shield_Controller : MonoBehaviour
                 rend.material.mainTexture = ShieldFullCracked;
                 break;
             case <=0:
-
-                // Test: Da Audio nicht abgespielt wird.
-
-                if (!ShieldBreakAudio.isPlaying)
-                {
-                    ShieldBreakAudio.Play();
-                }
-
-                // MÖGLICHE LÖSUNG: Leeres, übergeordnetes GameObject mit den Audios versehen. 
-                // Vermutung: Game Object wird gelöscht bevor die Audio überhaupt abspielen kann.
-                Debug.Log("Audio should be played on ShieldBreak!");
-
+                shieldShouldBreak = true; // Needed for SoundControll
                 Destroy(gameObject);
-               
                 break;
         }
     }
