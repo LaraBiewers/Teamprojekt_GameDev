@@ -132,7 +132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2979559545335610797}
   m_Layer: 0
-  m_Name: "Antik\xF6rper Prefab"
+  m_Name: Old AntibodyEdit
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -9,47 +9,66 @@ public class DetectColisionAntibody : MonoBehaviour
     private WeaponController WeaponController;
 
     public float health = 2f;
-    private float _projectileDamage;
-    public AudioSource breakingShield;
-    public AudioSource die;
+    private float projectileDamage;
+
+    public AudioSource elementDie;
 
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         WeaponController = GameObject.Find("Weapon").GetComponent<WeaponController>();
-        _projectileDamage = WeaponController.damage;
+        projectileDamage = WeaponController.damage;
     }
 
     void OnParticleCollision(GameObject other)
     {
-       // if (other.CompareTag("Projectile"))
-        //{
-            //Destroy(other.gameObject);
-            TakeDamage(_projectileDamage);
-        //}
+        if(other.CompareTag("Projectile"))
+        {
+            if (GetComponentInChildren<Shield_Controller>() != null)
+            {
+                Shield_Controller shield_Controller = GetComponentInChildren<Shield_Controller>();
+                shield_Controller.registerBulletHit();
+            }
+            else
+            {
+                TakeDamage(projectileDamage);
+            }
+        }
     }
 
     void TakeDamage (float amount)
     {
+        Debug.Log("HP before: " + health + " dmg: " + amount);
         health -= amount;
-        if (health == 1)
-        {
-            breakingShield.Play();
-        }
         if (health <= 0f)
         {
-            
+            elementDie.Play();
             Die();
+        }
+       
+        Debug.Log("Antibody: HP after hit to " + health);
+    }
+
+    void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("MiniVirus"))
+        {
+            Debug.Log("antibody: with a minivirus! Oh no!");
+            if (GetComponentInChildren<Shield_Controller>() != null)
+            {
+                Shield_Controller shield_Controller = GetComponentInChildren<Shield_Controller>();
+                shield_Controller.registerMinivirusHit();
+                Destroy(other.gameObject);
+            }
         }
     }
 
     void Die ()
     {
-        
+        Debug.Log("Antibody: It's been an honor, but now I must die");
         Destroy(gameObject);
         gameManager.updateScore(100);
-        die.Play();
     }
 
 }

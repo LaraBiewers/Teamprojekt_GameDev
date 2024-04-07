@@ -51,7 +51,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   directionChangeInterval: 5
-  maxHeadingChange: 100
+  maxHeadingChange: 180
+  rotationSpeed: 1.5
+  turnCounterMax: 5
 --- !u!54 &-1014934602758883239
 Rigidbody:
   m_ObjectHideFlags: 0

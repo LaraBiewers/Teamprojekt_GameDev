@@ -1,45 +1,25 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1242674918548074703
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3565857126095837054}
-  m_Layer: 0
-  m_Name: miniVirus
-  m_TagString: MiniVirus
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3565857126095837054
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1242674918548074703}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.272171, y: -17.304329, z: 7.413335}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1624585807468023225}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1225270822620932690
+--- !u!1001 &290532439670634374
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 3565857126095837054}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 053f9d55cc145e6448dbe4d38f79f14e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 053f9d55cc145e6448dbe4d38f79f14e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 053f9d55cc145e6448dbe4d38f79f14e, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 053f9d55cc145e6448dbe4d38f79f14e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
@@ -82,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 053f9d55cc145e6448dbe4d38f79f14e, type: 3}
       propertyPath: m_Name
-      value: Miniviren final
+      value: miniVirus
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 053f9d55cc145e6448dbe4d38f79f14e, type: 3}
       propertyPath: m_TagString
@@ -94,31 +74,26 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 053f9d55cc145e6448dbe4d38f79f14e, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 9084458920196449417}
+      addedObject: {fileID: 7717867548892674397}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 053f9d55cc145e6448dbe4d38f79f14e, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2361187209039871342}
+      addedObject: {fileID: 3876961171625435322}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 053f9d55cc145e6448dbe4d38f79f14e, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3480241447063689905}
+      addedObject: {fileID: 2685669080263919461}
   m_SourcePrefab: {fileID: 100100000, guid: 053f9d55cc145e6448dbe4d38f79f14e, type: 3}
---- !u!4 &1624585807468023225 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 053f9d55cc145e6448dbe4d38f79f14e, type: 3}
-  m_PrefabInstance: {fileID: 1225270822620932690}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &2143819541136119555 stripped
+--- !u!1 &633112431966980823 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 053f9d55cc145e6448dbe4d38f79f14e, type: 3}
-  m_PrefabInstance: {fileID: 1225270822620932690}
+  m_PrefabInstance: {fileID: 290532439670634374}
   m_PrefabAsset: {fileID: 0}
---- !u!54 &9084458920196449417
+--- !u!54 &7717867548892674397
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2143819541136119555}
+  m_GameObject: {fileID: 633112431966980823}
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
@@ -139,13 +114,13 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &2361187209039871342
+--- !u!135 &3876961171625435322
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2143819541136119555}
+  m_GameObject: {fileID: 633112431966980823}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -160,13 +135,13 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1.3387883
   m_Center: {x: 0.016875863, y: -0.0000003576278, z: 0.020226358}
---- !u!114 &3480241447063689905
+--- !u!114 &2685669080263919461
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2143819541136119555}
+  m_GameObject: {fileID: 633112431966980823}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 232c210beeaa6c4499c2cddcb83445b8, type: 3}

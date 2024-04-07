@@ -6,9 +6,13 @@ public class Movement : MonoBehaviour
 {
     // Start is called before the first frame update
     
-    public float speed = 500;
-    public float directionChangeInterval = 500;
-    public float maxHeadingChange = 50;
+    public float speed;
+    public float directionChangeInterval;
+    public float maxHeadingChange;
+    public float rotationSpeed;
+    public int turnCounterMax;
+    private int turnCounterCurrent;
+    private bool shouldTurnToPlayer = false;
 
     CharacterController controller;
     float heading;
@@ -17,6 +21,7 @@ public class Movement : MonoBehaviour
 
     void Start()
     {
+        turnCounterCurrent = turnCounterMax;
         controller = GetComponent<CharacterController>();
 
         // Set random initial rotation
@@ -29,7 +34,15 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
-        transform.eulerAngles = Vector3.Slerp(transform.eulerAngles, targetRotation, Time.deltaTime * directionChangeInterval);
+        if (!shouldTurnToPlayer)
+        {
+            transform.eulerAngles = Vector3.Slerp(transform.eulerAngles, targetRotation, Time.deltaTime * rotationSpeed * directionChangeInterval);   
+        }
+        else
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            transform.forward = Vector3.RotateTowards(transform.forward, player.transform.position - transform.position, 6, 5);
+        }
         var forward = transform.TransformDirection(Vector3.forward);
         controller.SimpleMove(forward * speed);
     }
@@ -42,9 +55,32 @@ public class Movement : MonoBehaviour
     {
         while (true)
         {
-            NewHeadingRoutine();
+            if( turnCounterCurrent > 0 )
+            {
+                NewHeadingRoutine();
+                turnCounterCurrent--;
+                shouldTurnToPlayer = false;
+                Debug.Log("going random");
+
+            }
+            else
+            {
+                Debug.Log("going to Player");
+
+                shouldTurnToPlayer = true;
+                turnCounterCurrent = turnCounterMax;
+            }
             yield return new WaitForSeconds(directionChangeInterval);
         }
+    }
+
+    private void PlayerFacingRoutine()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+        //heading = player.transform.TransformDirection(player.transform.position).y;
+        Debug.Log("Player directon: " +  heading);
+        targetRotation = new Vector3(0, heading, 0);
     }
 
     /// <summary>
@@ -57,4 +93,8 @@ public class Movement : MonoBehaviour
         heading = Random.Range(floor, ceil);
         targetRotation = new Vector3(0, heading, 0);
     }
+
+    
+
+
 }

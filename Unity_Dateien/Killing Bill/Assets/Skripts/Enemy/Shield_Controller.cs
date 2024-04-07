@@ -9,7 +9,8 @@ using UnityEngine.XR.WSA;
 public class Shield_Controller : MonoBehaviour
 {
     [SerializeField] private int health;
-    [SerializeField] private int maxHP;
+    [SerializeField] public const int maxHP = 100;
+    public int miniVirusDmg = maxHP;
     [SerializeField] private int _bulletDamage;
     private Renderer rend;
 
@@ -18,23 +19,27 @@ public class Shield_Controller : MonoBehaviour
     private Texture ShieldLightCracked;
     private Texture ShieldMidCracked;
     private Texture ShieldFullCracked;
+
+    public AudioSource ShieldBreakAudio;
     
     
     // Start is called before the first frame update
     void Start()
     {
         rend = GetComponent<Renderer>();
+        ShieldBreakAudio = GetComponent<AudioSource>();
         ShieldLightCracked = Resources.Load<Texture>("Materials/Shield_Lightly_Cracked");
         ShieldMidCracked = Resources.Load<Texture>("Materials/Shield_Mild_Cracked");
         ShieldFullCracked = Resources.Load<Texture>("Materials/Shield_Fully_Cracked");
-        maxHP = 100;
         health = maxHP;
     }
 
-    private void ShieldCheck(int h)
+    private void ShieldCheck()
     {
-        switch (h)
+        switch (health)
         {
+            case >= maxHP:
+                break;
             case >= 70:
                 rend.material.mainTexture = ShieldLightCracked;
                 break;
@@ -44,39 +49,40 @@ public class Shield_Controller : MonoBehaviour
             case > 0:
                 rend.material.mainTexture = ShieldFullCracked;
                 break;
-            default:
+            case <=0:
+
+                // Test: Da Audio nicht abgespielt wird.
+
+                if (!ShieldBreakAudio.isPlaying)
+                {
+                    ShieldBreakAudio.Play();
+                }
+
+                // MÖGLICHE LÖSUNG: Leeres, übergeordnetes GameObject mit den Audios versehen. 
+                // Vermutung: Game Object wird gelöscht bevor die Audio überhaupt abspielen kann.
+                Debug.Log("Audio should be played on ShieldBreak!");
+
                 Destroy(gameObject);
+               
                 break;
         }
     }
-    // Update is called once per frame
-    void Update()
+
+    public void registerMinivirusHit()
     {
-        ShieldCheck(health);
-        health = health > 100 ? 100 : health;
-        health = health < 0 ? 0 : health;
+        TakeShieldDamage(maxHP);
     }
 
-    void OnParticleCollision(GameObject other)
+    public void registerBulletHit()
     {
         TakeShieldDamage(_bulletDamage);
-    }
-
-    
-    void OnCollisionEnter(Collision other)
-    {
-        Debug.Log("outer");
-        if (other.gameObject.CompareTag("MiniVirus"))
-        {
-            Debug.Log("Inner");
-            TakeShieldDamage(maxHP);
-            Destroy(other.gameObject);
-        }
     }
     
 
     void TakeShieldDamage(int amount)
     {
+        Debug.Log("shield: taking damage");
         health -= amount;
+        ShieldCheck();
     }
 }
