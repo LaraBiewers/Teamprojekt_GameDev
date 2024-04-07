@@ -10,6 +10,8 @@ public class DetectColisionAntibody : MonoBehaviour
 
     public float health = 2f;
     private float _projectileDamage;
+    public AudioSource breakingShield;
+    public AudioSource die;
 
     // Start is called before the first frame update
     void Start()
@@ -31,16 +33,23 @@ public class DetectColisionAntibody : MonoBehaviour
     void TakeDamage (float amount)
     {
         health -= amount;
+        if (health == 1)
+        {
+            breakingShield.Play();
+        }
         if (health <= 0f)
         {
+            
             Die();
         }
     }
 
     void Die ()
     {
+        
         Destroy(gameObject);
         gameManager.updateScore(100);
+        die.Play();
     }
 
 }
