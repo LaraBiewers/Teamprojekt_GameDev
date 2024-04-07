@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
     public int scoreGoal = 400;
     public int health;
     public static bool gameIsOver = false;
+
+    // Managing GameFlow. IMPORTENT, DO NOT DELETE!
+    private bool isWon;
     private bool isDead;
 
     // GameOverScreen
@@ -41,8 +44,9 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         // Handling GameWinning
-        if(score >= scoreGoal)
+        if(score >= scoreGoal && !isWon)
         {
+            isWon = true;
             winningScreenText.SetActive(true);
             gameOverScreen();
             Debug.Log("You won the Game!");
@@ -98,27 +102,27 @@ public class GameManager : MonoBehaviour
     // GameOverScreen functionality 1
     public void restart()
     {
+        Debug.Log("Restart");
+
         gameIsOver = false;
         Time.timeScale = 1.0f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-
-        Debug.Log("Restart");
     }
 
     // GameOverScreen functionality 2
     public void mainMenu()
     {
+        Debug.Log("Main Menu");
+
         gameIsOver = false;
         SceneManager.LoadScene("MainMenu");
-        
-        Debug.Log("Main Menu");
     }
 
     // GameOverScreen functionality 3
     public void quit()
     {
-        Application.Quit();
-
         Debug.Log("Quit");
+
+        Application.Quit();
     }
 }
