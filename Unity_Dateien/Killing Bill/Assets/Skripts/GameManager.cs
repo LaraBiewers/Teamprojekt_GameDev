@@ -28,6 +28,9 @@ public class GameManager : MonoBehaviour
     public Slider HealthBar;
     public RawImage Crossheir;
 
+    // SoundControll
+    public AudioSource DyingSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,6 +59,7 @@ public class GameManager : MonoBehaviour
         if(health == 0 && !isDead)
         {
             isDead = true;
+            DyingSound.Play();
             losingScreenText.SetActive(true);
             gameOverScreen();
             Debug.Log("Player is Dead!");
