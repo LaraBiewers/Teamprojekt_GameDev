@@ -40,8 +40,7 @@ public class Movement : MonoBehaviour
         }
         else
         {
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
-            transform.forward = Vector3.RotateTowards(transform.forward, player.transform.position - transform.position, 6, 5);
+            transform.eulerAngles = Vector3.Slerp(transform.eulerAngles, targetRotation, Time.deltaTime * rotationSpeed * directionChangeInterval);
         }
         var forward = transform.TransformDirection(Vector3.forward);
         controller.SimpleMove(forward * speed);
@@ -66,7 +65,7 @@ public class Movement : MonoBehaviour
             else
             {
                 Debug.Log("going to Player");
-
+                TurnAroundRoutine();
                 shouldTurnToPlayer = true;
                 turnCounterCurrent = turnCounterMax;
             }
@@ -93,8 +92,14 @@ public class Movement : MonoBehaviour
         heading = Random.Range(floor, ceil);
         targetRotation = new Vector3(0, heading, 0);
     }
-
+    
+    void TurnAroundRoutine()
+    {
+        heading = Random.Range(90,270);
+        targetRotation = new Vector3(0, heading, 0);
+    }
     
 
-
+    
+    
 }

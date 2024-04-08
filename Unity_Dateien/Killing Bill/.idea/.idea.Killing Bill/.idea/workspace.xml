@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ac04d711-9bcc-4d41-be64-43569f3776b0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Antikörper Prefab.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Antikörper Prefab.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Skripts/Player/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Skripts/Player/PlayerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Killing Bill/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Killing Bill/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/NewAntibody2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/NewAntibody2.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Skripts/Enemy/Movement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Skripts/Enemy/Movement.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,6 +92,8 @@
       <workItem from="1710506649922" duration="480000" />
       <workItem from="1711453131384" duration="2584000" />
       <workItem from="1712140786504" duration="26000" />
+      <workItem from="1712583246288" duration="1219000" />
+      <workItem from="1712584805856" duration="435000" />
     </task>
     <servers />
   </component>
