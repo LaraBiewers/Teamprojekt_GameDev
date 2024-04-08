@@ -57,8 +57,7 @@ public class WeaponController : MonoBehaviour
         // check if ray hits something
         if (Physics.Raycast(ray, out hit))
         {
-            // Logging what's hit and where
-            Debug.Log(hit.transform.name);
+            // where were the hit?
             targetPoint = hit.point;
         }
         else

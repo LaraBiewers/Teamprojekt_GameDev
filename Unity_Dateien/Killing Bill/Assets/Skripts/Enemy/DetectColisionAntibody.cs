@@ -39,22 +39,18 @@ public class DetectColisionAntibody : MonoBehaviour
 
     void TakeDamage (float amount)
     {
-        Debug.Log("HP before: " + health + " dmg: " + amount);
         health -= amount;
         if (health <= 0f)
         {
             AntibodyShouldDie = true; // Needed for SoundControll
             Die();
         }
-       
-        Debug.Log("Antibody: HP after hit to " + health);
     }
 
     void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("MiniVirus"))
         {
-            Debug.Log("antibody: with a minivirus! Oh no!");
             if (GetComponentInChildren<Shield_Controller>() != null)
             {
                 Shield_Controller shield_Controller = GetComponentInChildren<Shield_Controller>();
@@ -66,7 +62,6 @@ public class DetectColisionAntibody : MonoBehaviour
 
     void Die ()
     {
-        Debug.Log("Antibody: It's been an honor, but now I must die");
         Destroy(gameObject);
         gameManager.updateScore(100);
     }

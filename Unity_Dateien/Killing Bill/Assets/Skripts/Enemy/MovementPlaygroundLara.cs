@@ -2,48 +2,60 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Movement : MonoBehaviour
+public class MovementPlaygroundLara : MonoBehaviour
 {
-    // Start is called before the first frame update
-    
+
     public float speed;
     public float directionChangeInterval;
     public float maxHeadingChange;
     public float rotationSpeed;
-    public int turnCounterMax;
 
-    private int turnCounterCurrent;
+    private int randomTurnCounter;
     private bool shouldTurnToPlayer = false;
 
     CharacterController controller;
     float heading;
     Vector3 targetRotation;
+    Vector3 lastPosition;
 
-
+    // Start is called before the first frame update
     void Start()
     {
-        turnCounterCurrent = turnCounterMax;
+        randomTurnCounter = Random.Range(1,4);
         controller = GetComponent<CharacterController>();
 
         // Set random initial rotation
         heading = Random.Range(0, 360);
         transform.eulerAngles = new Vector3(0, heading, 0);
 
+        lastPosition = transform.position;
+
         StartCoroutine(NewHeading());
     }
-   
+
     void Update()
     {
         if (!shouldTurnToPlayer)
         {
-            transform.eulerAngles = Vector3.Slerp(transform.eulerAngles, targetRotation, Time.deltaTime * rotationSpeed * directionChangeInterval);   
+            transform.eulerAngles = Vector3.Slerp(transform.eulerAngles, targetRotation, Time.deltaTime * rotationSpeed * directionChangeInterval);
         }
         else
         {
             transform.eulerAngles = Vector3.Slerp(transform.eulerAngles, targetRotation, Time.deltaTime * rotationSpeed * directionChangeInterval);
         }
+
         var forward = transform.TransformDirection(Vector3.forward);
         controller.SimpleMove(forward * speed);
+
+        // BewegungsRoutine starten wenn der NPC an einer Stelle festhängt
+        if (transform.position == lastPosition)
+        {
+            NewHeadingRoutine();
+        }
+        else
+        {
+            lastPosition = transform.position;
+        }
     }
 
     /// <summary>
@@ -54,36 +66,31 @@ public class Movement : MonoBehaviour
     {
         while (true)
         {
-            if( turnCounterCurrent > 0 )
+            if (randomTurnCounter > 0)
             {
-                NewHeadingRoutine();
-                turnCounterCurrent--;
-                shouldTurnToPlayer = false;
                 Debug.Log("going random");
+
+                NewHeadingRoutine();
+                randomTurnCounter--;
+                shouldTurnToPlayer = false;
             }
             else
             {
                 Debug.Log("going to Player");
-                TurnAroundRoutine();
+
+                // Schäfchen sollen nicht auf Spieler zulaufen
+                if (!CompareTag("SheepCell"))
+                {
+                    TurnToPlayerRoutine();
+                }
                 shouldTurnToPlayer = true;
-                turnCounterCurrent = turnCounterMax;
+                randomTurnCounter = Random.Range(1, 4);
             }
             yield return new WaitForSeconds(directionChangeInterval);
         }
     }
 
-    private void PlayerFacingRoutine()
-    {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-
-        //heading = player.transform.TransformDirection(player.transform.position).y;
-        Debug.Log("Player directon: " +  heading);
-        targetRotation = new Vector3(0, heading, 0);
-    }
-
-    /// <summary>
-    /// Calculates a new direction to move towards.
-    /// </summary>
+    // Calculates a new direction to move towards.
     void NewHeadingRoutine()
     {
         var floor = transform.eulerAngles.y - maxHeadingChange;
@@ -91,11 +98,19 @@ public class Movement : MonoBehaviour
         heading = Random.Range(floor, ceil);
         targetRotation = new Vector3(0, heading, 0);
     }
-    
-    void TurnAroundRoutine()
-    {
-        heading = Random.Range(90,270);
-        targetRotation = new Vector3(0, heading, 0);
-    }
 
+    void TurnToPlayerRoutine()
+    {
+        //heading = Random.Range(90, 270);
+        //targetRotation = new Vector3(0, heading, 0);
+        
+        GameObject player = GameObject.FindWithTag("Player");
+
+        Vector3 direction = player.transform.position - transform.position;
+        direction.y = 0f;
+
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+    }
 }

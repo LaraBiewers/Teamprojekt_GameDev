@@ -8,6 +8,7 @@ TagManager:
   - Projectile
   - MiniVirus
   - Shield
+  - SheepCell
   layers:
   - Default
   - TransparentFX

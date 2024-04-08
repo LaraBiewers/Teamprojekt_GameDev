@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
-
+public class DetectCollisionSheepCell : MonoBehaviour
 { 
     private GameManager gameManager;
     private WeaponController weaponController;
@@ -11,6 +10,7 @@ public class NewBehaviourScript : MonoBehaviour
     public float health = 2f;
     public int amountNiniViruses = 3;
     private float projectileDamage;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,15 +19,9 @@ public class NewBehaviourScript : MonoBehaviour
         projectileDamage = weaponController.damage;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnParticleCollision(GameObject other)
     {
-            TakeDamage(projectileDamage);
+        TakeDamage(projectileDamage);
     }
 
     void TakeDamage(float amount)
@@ -44,7 +38,6 @@ public class NewBehaviourScript : MonoBehaviour
         Vector3 pos = gameObject.transform.position;
         Destroy(gameObject);
         SpawnMiniViruses(pos);
-        
     }
 
     void SpawnMiniViruses(Vector3 pos)

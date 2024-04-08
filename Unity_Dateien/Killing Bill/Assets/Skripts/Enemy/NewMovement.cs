@@ -14,6 +14,7 @@ public class NewMovement : MonoBehaviour
     public Vector3 walkPoint;
     bool walkPointSet;
     public float walkPointRange;
+
     // Start is called before the first frame update
     void Start()
     {
