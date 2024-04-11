@@ -34,6 +34,9 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        player.transform.position.Set(1, 1.5f, 1);
+        
         score = 0;
         health = 100;
 
@@ -79,8 +82,35 @@ public class GameManager : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
-    
-    
+
+    // GENIALE METHODE: noch ohne Funktion
+    private void regenScene()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject[] sheep = GameObject.FindGameObjectsWithTag("SheepCell");
+        GameObject[] tiles = GameObject.FindGameObjectsWithTag("LvLTiles");
+
+        foreach (GameObject enemy in enemies)
+        {
+            Destroy(enemy);
+        }foreach (GameObject shep in sheep)
+        {
+            Destroy(shep);
+        }foreach (GameObject tile in tiles)
+        {
+            Destroy(tile);
+        }
+
+
+        health = 100;
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        player.transform.position.Set(1, 1.5f, 1);
+
+        GetComponentInParent<TileManagement1>().currentLevel++;
+        GetComponentInParent<TileManagement1>().MakeRoom();
+        GetComponentInParent<TileManagement1>().spawnEntities();
+        
+    }
 
     public void updateScore(int scoreToAdd)
     {

@@ -55,7 +55,7 @@ public class TileManagement1 : MonoBehaviour
         //MakeTileOverview();
     }
 
-    void spawnEntities()
+    public void spawnEntities()
     {
         int enemyAmount = (int) (4.5 * currentLevel);
         int sheepAmount = 2 * currentLevel;
@@ -175,7 +175,7 @@ public class TileManagement1 : MonoBehaviour
         }
     }
 
-    void MakeRoom()
+    public void MakeRoom()
     {
 
         room = new PlacedTile[roomWidth, roomLength];

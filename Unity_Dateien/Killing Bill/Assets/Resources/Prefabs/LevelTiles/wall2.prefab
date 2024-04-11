@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8620560944534148643}
   m_Layer: 7
   m_Name: wall2
-  m_TagString: Untagged
+  m_TagString: LvLTiles
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
