@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using Random = System.Random;
 
 public class TileManagement1 : MonoBehaviour
 {
-    public int roomWidth;
-    public int roomLength;
+    private int roomWidth;
+    private int roomLength;
 
+    public int currentLevel = 1;
     /*
-     * Tile nummerierung Übersicht:
+     * Tile nummerierung ï¿½bersicht:
      * -1 nicht definiert
-     * 0 Tür
+     * 0 Tï¿½r
      * 1 Wand
      * 2 Boden
      * 3 Hoher Boden
@@ -24,6 +26,10 @@ public class TileManagement1 : MonoBehaviour
 
     void Start()
     {
+
+        roomLength = roomWidth = 10 + (currentLevel);
+        
+        
         tileset = new List<Tile>();
 
         addTile(2, 2, 1, 1, "Wall1");
@@ -45,7 +51,93 @@ public class TileManagement1 : MonoBehaviour
 
         
         MakeRoom();
+        spawnEntities();
         //MakeTileOverview();
+    }
+
+    void spawnEntities()
+    {
+        int enemyAmount = (int) (4.5 * currentLevel);
+        int sheepAmount = 2 * currentLevel;
+
+        GetComponentInParent<GameManager>().scoreGoal = enemyAmount * 100;
+
+        
+        bool[,] blockedSpawns = new bool[roomLength,roomLength];
+        for (int i = 0; i < roomLength; i++)
+        {
+            for (int j = 0; j < roomLength; j++)
+            {
+                if(i < 4 && j < 4)
+                    blockedSpawns[i, j] = true;
+                else
+                    blockedSpawns[i, j] = false;
+            }
+        }
+
+        Random random = new Random();
+        
+
+        for (int i = 0; i < enemyAmount; i++)
+        {
+            int locX = roomLength;
+            int locY = roomLength;
+            
+            bool emptyTileFound = false;
+            int timer = 0;
+            while (!emptyTileFound)
+            {
+                locX = random.Next(roomLength);
+                locY = random.Next(roomLength);
+                
+                if (!blockedSpawns[locX, locY])
+                {
+                    emptyTileFound = true;
+                    blockedSpawns[locX, locY] = true;
+                }
+                timer++;
+                Debug.Log("Timer:  " + timer);
+                if (timer > 100)
+                {
+                    break;
+                }
+            }
+            
+            var loadedObject = Resources.Load("Prefabs/NewAntibody2");
+            GameObject newEnemy = (GameObject)Instantiate(loadedObject, new Vector3(locX * 2 -1, 2, locY * 2 -1),
+                Quaternion.Euler(0, random.Next(360), 0));
+        }
+        
+        for (int i = 0; i < sheepAmount; i++)
+        {
+            int locX = roomLength;
+            int locY = roomLength;
+            
+            bool emptyTileFound = false;
+            int timer = 0;
+            while (!emptyTileFound)
+            {
+                locX = random.Next(roomLength);
+                locY = random.Next(roomLength);
+                
+                if (!blockedSpawns[locX, locY])
+                {
+                    emptyTileFound = true;
+                    blockedSpawns[locX, locY] = true;
+                }
+                timer++;
+                Debug.Log("Timer:  " + timer);
+                if (timer > 100)
+                {
+                    break;
+                }
+            }
+            
+            var loadedObject = Resources.Load("Prefabs/SheepCell_PF");
+            GameObject newEnemy = (GameObject)Instantiate(loadedObject, new Vector3(locX * 2, 2, locY * 2),
+                Quaternion.Euler(0, random.Next(360), 0));
+        }
+        
     }
 
     void addTile(int north, int east, int south, int west, String model)
@@ -142,9 +234,9 @@ public class TileManagement1 : MonoBehaviour
     }
 
     /*
-     * Tile nummerierung Übersicht:
+     * Tile nummerierung ï¿½bersicht:
      * 0 nicht definiert
-     * 11 Tür
+     * 11 Tï¿½r
      * 1 Wand
      * 2 Boden
      * 3 Hoher Boden
@@ -159,8 +251,8 @@ public class TileManagement1 : MonoBehaviour
     /// <summary>
     /// Sucht ein Tile, welches an die angegebene Stelle passt.
     /// </summary>
-    /// <param name="x">X Koordinate des zu füllenden Feldes</param>
-    /// <param name="z">Y Koordinate des zu füllenden Feldes</param>
+    /// <param name="x">X Koordinate des zu fï¿½llenden Feldes</param>
+    /// <param name="z">Y Koordinate des zu fï¿½llenden Feldes</param>
     /// <returns></returns>
     PlacedTile findFittingTile(int x, int z)
     {
@@ -222,7 +314,7 @@ public class TileManagement1 : MonoBehaviour
         }
         if(fittingTiles.Count == 0)
         {
-            throw new MissingComponentException("ERROR! WIE ZUR HÖLLE soll ich denn bitte ein Tile für die wanted verts\n" +
+            throw new MissingComponentException("ERROR! WIE ZUR Hï¿½LLE soll ich denn bitte ein Tile fï¿½r die wanted verts\n" +
                 wantedVerts[0] + "\n" + wantedVerts[1] + "\n" + wantedVerts[2] + "\n" + wantedVerts[3] + "\n finden??!" );
         }
 
@@ -246,7 +338,7 @@ public class TileManagement1 : MonoBehaviour
 
         if (wantedVerts.Length != 4)
         {
-            throw new ArgumentException("CheckWantedSides: wantedSides Argument muss die Länge 4 haben.");
+            throw new ArgumentException("CheckWantedSides: wantedSides Argument muss die Lï¿½nge 4 haben.");
         }
 
         if (((verts[0] == wantedVerts[0]) || wantedVerts[0] == 0) &&
@@ -308,7 +400,7 @@ class Tile
     {
         if (VertNorthWest == 0 || VertNorthEast == 0 || VertSouthEast == 0 || VertSouthWest == 0)
         {
-            throw new ArgumentOutOfRangeException("Ein Tile darf nicht mit dem Vertex 0 initialisiert werden. 0 ist für leere Kanten reserviert");
+            throw new ArgumentOutOfRangeException("Ein Tile darf nicht mit dem Vertex 0 initialisiert werden. 0 ist fï¿½r leere Kanten reserviert");
         }
 
         this.VertNorthWest = VertNorthWest;
@@ -321,3 +413,4 @@ class Tile
         Rotation = rotation;
     }
 }
+

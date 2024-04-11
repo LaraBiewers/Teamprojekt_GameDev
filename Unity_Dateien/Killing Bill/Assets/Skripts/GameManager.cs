@@ -10,7 +10,7 @@ using System;
 public class GameManager : MonoBehaviour
 {
     public int score;
-    public int scoreGoal = 400;
+    public int scoreGoal;
     public int health;
     public static bool gameIsOver = false;
 
@@ -79,6 +79,8 @@ public class GameManager : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
+    
+    
 
     public void updateScore(int scoreToAdd)
     {
