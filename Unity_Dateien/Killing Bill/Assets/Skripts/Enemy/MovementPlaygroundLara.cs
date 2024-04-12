@@ -47,7 +47,7 @@ public class MovementPlaygroundLara : MonoBehaviour
         var forward = transform.TransformDirection(Vector3.forward);
         controller.SimpleMove(forward * speed);
 
-        // BewegungsRoutine starten wenn der NPC an einer Stelle festhängt
+        // BewegungsRoutine starten wenn der NPC an einer Stelle festhï¿½ngt
         if (transform.position == lastPosition)
         {
             NewHeadingRoutine();
@@ -68,7 +68,7 @@ public class MovementPlaygroundLara : MonoBehaviour
         {
             if (randomTurnCounter > 0)
             {
-                Debug.Log("going random");
+                //Debug.Log("going random");
 
                 NewHeadingRoutine();
                 randomTurnCounter--;
@@ -78,7 +78,7 @@ public class MovementPlaygroundLara : MonoBehaviour
             {
                 Debug.Log("going to Player");
 
-                // Schäfchen sollen nicht auf Spieler zulaufen
+                // Schï¿½fchen sollen nicht auf Spieler zulaufen
                 if (!CompareTag("SheepCell"))
                 {
                     TurnToPlayerRoutine();

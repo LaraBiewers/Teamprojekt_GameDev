@@ -23,10 +23,11 @@ public class TileManagement1 : MonoBehaviour
      */
     private List<Tile> tileset;
     private PlacedTile[,] room;
-
-    void Start()
+    
+    private void Awake()
     {
-
+        currentLevel = GameObject.FindGameObjectWithTag("lvlIndikator").GetComponent<lvlIndikatorSkript>().currentLvL;
+        
         roomLength = roomWidth = 10 + (currentLevel);
         
         
@@ -53,6 +54,12 @@ public class TileManagement1 : MonoBehaviour
         MakeRoom();
         spawnEntities();
         //MakeTileOverview();
+    }
+
+    void Start()
+    {
+
+
     }
 
     public void spawnEntities()
@@ -96,7 +103,7 @@ public class TileManagement1 : MonoBehaviour
                     blockedSpawns[locX, locY] = true;
                 }
                 timer++;
-                Debug.Log("Timer:  " + timer);
+                //Debug.Log("Timer:  " + timer);
                 if (timer > 100)
                 {
                     break;

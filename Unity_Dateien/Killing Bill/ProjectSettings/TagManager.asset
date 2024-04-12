@@ -10,6 +10,7 @@ TagManager:
   - Shield
   - SheepCell
   - LvLTiles
+  - lvlIndikator
   layers:
   - Default
   - TransparentFX

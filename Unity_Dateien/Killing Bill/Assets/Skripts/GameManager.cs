@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     public GameObject winningScreenText;
     public GameObject losingScreenText;
     public GameObject gameOverUI;
+    public GameObject continueToNextLevelButton;
 
     // Other UI Elements
     public TextMeshProUGUI scoreText;
@@ -31,9 +32,13 @@ public class GameManager : MonoBehaviour
     // SoundControll
     public AudioSource DyingSound;
 
+
+
     // Start is called before the first frame update
     void Start()
     {
+
+        
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         player.transform.position.Set(1, 1.5f, 1);
         
@@ -54,6 +59,7 @@ public class GameManager : MonoBehaviour
         {
             isWon = true;
             winningScreenText.SetActive(true);
+            continueToNextLevelButton.SetActive(true);
             gameOverScreen();
             Debug.Log("You won the Game!");
         }
@@ -75,9 +81,9 @@ public class GameManager : MonoBehaviour
 
     }
 
+    // Töte alles -> Game wird gewonnen
     public void killAll()
     {
-        //Geht alle sterben
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         GameObject[] sheep = GameObject.FindGameObjectsWithTag("SheepCell");
 
@@ -90,21 +96,7 @@ public class GameManager : MonoBehaviour
             Destroy(shep);
         }
 
-        score = scoreGoal;
-    }
-
-    // Showing GameOverScreen
-    public void gameOverScreen()
-    {
-        gameIsOver = true;
-
-        gameOverUI.SetActive(true);
-        Crossheir.gameObject.SetActive(false);
-        HealthBar.gameObject.SetActive(false);
-
-        Time.timeScale = 0.0f;
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
+        updateScore(scoreGoal);
     }
 
     // GENIALE METHODE: noch ohne Funktion
@@ -136,12 +128,14 @@ public class GameManager : MonoBehaviour
         
     }
 
+    // Update Score-UI-Text
     public void updateScore(int scoreToAdd)
     {
         score += scoreToAdd;
         scoreText.text = "Score: " + score;
     }
 
+    // Player taking Damage
     public void TakeDamage(int damage)
     {
         health -= damage;
@@ -157,6 +151,32 @@ public class GameManager : MonoBehaviour
     public void UpdateHealthBar()
     {
         HealthBar.value = health;
+    }
+    
+    // Showing GameOverScreen
+    public void gameOverScreen()
+    {
+        gameIsOver = true;
+
+        gameOverUI.SetActive(true);
+        Crossheir.gameObject.SetActive(false);
+        HealthBar.gameObject.SetActive(false);
+
+        Time.timeScale = 0.0f;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+    
+    // GameOverScreen functionality 0 (Just in case of winning)
+    public void continueGame()
+    {
+        GameObject lvlIndikator = GameObject.FindGameObjectWithTag("lvlIndikator");
+        ++lvlIndikator.GetComponent<lvlIndikatorSkript>().currentLvL;
+        lvlIndikator.GetComponent<lvlIndikatorSkript>().shouldSurvive = true;
+        
+        DontDestroyOnLoad(lvlIndikator);
+        
+        restart();
     }
 
     // GameOverScreen functionality 1

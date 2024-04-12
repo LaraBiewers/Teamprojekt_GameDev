@@ -3,7 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="ac04d711-9bcc-4d41-be64-43569f3776b0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Killing Bill/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Killing Bill/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Skripts/Player/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Skripts/Player/PlayerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Scenes/Development.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Scenes/Development.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Skripts/Enemy/MovementPlaygroundLara.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Skripts/Enemy/MovementPlaygroundLara.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Skripts/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Skripts/GameManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Skripts/LvLCreation/TileManagement1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Skripts/LvLCreation/TileManagement1.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -12,6 +15,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/lvlIndikatorSkript.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/Unity/Game test/Assets/Shield_Controller.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -95,7 +99,7 @@
       <workItem from="1712583246288" duration="1219000" />
       <workItem from="1712584805856" duration="1019000" />
       <workItem from="1712833241604" duration="7326000" />
-      <workItem from="1712914241140" duration="310000" />
+      <workItem from="1712914241140" duration="4180000" />
     </task>
     <servers />
   </component>
