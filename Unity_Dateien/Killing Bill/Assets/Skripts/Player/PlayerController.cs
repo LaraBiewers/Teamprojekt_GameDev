@@ -99,6 +99,7 @@ public class PlayerController : MonoBehaviour
             playerRB.drag = normalDrag;
         }
 
+
     }
 
     private void OnCollisionEnter(Collision collision)

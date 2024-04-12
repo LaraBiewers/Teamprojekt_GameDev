@@ -67,6 +67,30 @@ public class GameManager : MonoBehaviour
             gameOverScreen();
             Debug.Log("Player is Dead!");
         }
+        
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            killAll();
+        }
+
+    }
+
+    public void killAll()
+    {
+        //Geht alle sterben
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject[] sheep = GameObject.FindGameObjectsWithTag("SheepCell");
+
+        foreach (GameObject enemy in enemies)
+        {
+            Destroy(enemy);
+        }
+        foreach (GameObject shep in sheep)
+        {
+            Destroy(shep);
+        }
+
+        score = scoreGoal;
     }
 
     // Showing GameOverScreen

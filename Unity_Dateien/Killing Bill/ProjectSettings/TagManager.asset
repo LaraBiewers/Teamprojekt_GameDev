@@ -9,6 +9,7 @@ TagManager:
   - MiniVirus
   - Shield
   - SheepCell
+  - LvLTiles
   layers:
   - Default
   - TransparentFX
