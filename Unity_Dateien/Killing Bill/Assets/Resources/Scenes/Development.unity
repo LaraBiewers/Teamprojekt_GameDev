@@ -7621,7 +7621,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1398440676}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: restart
+        m_MethodName: startNewGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

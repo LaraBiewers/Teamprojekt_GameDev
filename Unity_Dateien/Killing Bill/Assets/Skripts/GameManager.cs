@@ -179,8 +179,19 @@ public class GameManager : MonoBehaviour
         restart();
     }
 
+    public void startNewGame()
+    {
+        GameObject lvlIndikator = GameObject.FindGameObjectWithTag("lvlIndikator");
+        lvlIndikator.GetComponent<lvlIndikatorSkript>().currentLvL = 1;
+        
+        lvlIndikator.GetComponent<lvlIndikatorSkript>().shouldSurvive = true;
+        
+        DontDestroyOnLoad(lvlIndikator);
+        restart();
+    }
+
     // GameOverScreen functionality 1
-    public void restart()
+    private void restart()
     {
         Debug.Log("Restart");
 
